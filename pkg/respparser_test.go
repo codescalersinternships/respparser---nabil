@@ -121,6 +121,12 @@ func TestParse(t *testing.T) {
 			},
 			expectedError: false,
 		},
+		{
+			name:  "nested arrays",
+			input: "*3\r\n*3\r\n*3\r\n:1\r\n:2\r\n:3\r\n\r\n:2\r\n:3\r\n\r\n:2\r\n:3\r\n",
+			expected : []interface {}{[]interface {}{[]interface {}{[]interface {}{int64(1), int64(2), int64(3)}, int64(2), int64(3)}, int64(2), int64(3)}},
+			expectedError: false,
+		},
 	}
 
 	for _, test := range tests {

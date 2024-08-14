@@ -91,7 +91,6 @@ func readArray(idx *int, str *string) ([]interface{}, error) {
 	if length == -1 {
 		return nil, nil
 	}
-
 	var out []interface{}
 	(*idx)++
 	for i := 0; i < int(length); i++ {
@@ -178,6 +177,7 @@ func readArray(idx *int, str *string) ([]interface{}, error) {
 		}
 		(*idx)++
 	}
+	(*idx)++
 	return out, nil
 }
 
@@ -322,6 +322,7 @@ func readMap(idx *int, str *string) (map[interface{}]interface{}, error) {
 
 		prev = val
 	}
+	(*idx)++
 	return out, nil
 
 }
