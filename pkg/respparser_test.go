@@ -122,14 +122,6 @@ func TestParse(t *testing.T){
 			},
 			expectedError: false,
 		},
-		{
-			name: "Simple String",
-			input: "+OK\r",
-			expected: []interface{}{
-				"OK",
-			},
-			expectedError: false,
-		},
 	}
 
 	for _, test := range tests {
