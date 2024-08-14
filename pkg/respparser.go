@@ -12,7 +12,7 @@ func readSimpleString(idx *int, str *string) (string, error) {
 	out := ""
 	lim := strings.Index((*str)[*idx:], crlfTerminator)
 	if lim == -1 {
-		return "", fmt.Errorf("error of terminator wasn't found")
+		return "", fmt.Errorf("%s","error of terminator wasn't found")
 	}
 	lim = lim + (*idx)
 	out = (*str)[*idx:lim]
@@ -24,19 +24,19 @@ func readErrorMSG(idx *int, str *string) (error, error) {
 	out := ""
 	lim := strings.Index((*str)[*idx:], crlfTerminator)
 	if lim == -1 {
-		return nil, fmt.Errorf("error of terminator wasn't found")
+		return nil, fmt.Errorf("%s","error of terminator wasn't found")
 	}
 	lim = lim + (*idx)
 	out = (*str)[*idx:lim]
 	*idx = lim + 1
-	return fmt.Errorf(out), nil
+	return fmt.Errorf("%s",out), nil
 }
 
 func readInteger(idx *int, str *string) (int64, error) {
 	out := ""
 	lim := strings.Index((*str)[*idx:], crlfTerminator)
 	if lim == -1 {
-		return -1, fmt.Errorf("error of terminator wasn't found")
+		return -1, fmt.Errorf("%s","error of terminator wasn't found")
 	}
 	lim = lim + (*idx)
 	out = (*str)[*idx:lim]
@@ -60,7 +60,7 @@ func readBulkString(idx *int, str *string) (interface{}, error) {
 	(*idx)++
 	lim := (*idx) + int(length)
 	if lim > len(*str) {
-		return "", fmt.Errorf("error of string lenght isn't enough")
+		return "", fmt.Errorf("%s","error of string lenght isn't enough")
 	}
 	out = (*str)[*idx:lim]
 	if out == "-1" {
@@ -72,7 +72,7 @@ func readBulkString(idx *int, str *string) (interface{}, error) {
 
 func readBoolean(idx *int, str *string) (bool, error) {
 	if (*idx) >= len(*str) {
-		return false, fmt.Errorf("error of string lenght isn't enough")
+		return false, fmt.Errorf("%s","error of string lenght isn't enough")
 	}
 	if (*str)[(*idx)] == 't' {
 		*idx += 2
@@ -174,7 +174,7 @@ func readArray(idx *int, str *string) ([]interface{}, error) {
 			}
 			out = append(out, respMap)
 		default:
-			return nil, fmt.Errorf("error of unsupported datatype")
+			return nil, fmt.Errorf("%s","error of unsupported datatype")
 		}
 		(*idx)++
 	}
@@ -185,7 +185,7 @@ func readFloat(idx *int, str *string) (float64, error) {
 	out := ""
 	lim := strings.Index((*str)[*idx:], crlfTerminator)
 	if lim == -1 {
-		return -1, fmt.Errorf("error of terminator wasn't found")
+		return -1, fmt.Errorf("%s","error of terminator wasn't found")
 	}
 	lim = lim + (*idx)
 	out = (*str)[*idx:lim]
@@ -206,7 +206,7 @@ func readBulkError(idx *int, str *string) (error, error) {
 	(*idx)++
 	lim := (*idx) + int(length)
 	if lim > len(*str) {
-		return nil, fmt.Errorf("error of string lenght isn't enough")
+		return nil, fmt.Errorf("%s","error of string lenght isn't enough")
 	}
 	out = (*str)[*idx:lim]
 	if out == "-1" {
@@ -214,7 +214,7 @@ func readBulkError(idx *int, str *string) (error, error) {
 	}
 	*idx = lim + 1
 
-	return fmt.Errorf(out), nil
+	return fmt.Errorf("%s",out), nil
 }
 
 func readMap(idx *int, str *string) (map[interface{}]interface{}, error) {
@@ -313,7 +313,7 @@ func readMap(idx *int, str *string) (map[interface{}]interface{}, error) {
 			}
 			val = respMap
 		default:
-			return nil, fmt.Errorf("error of unsupported datatype")
+			return nil, fmt.Errorf("%s","error of unsupported datatype")
 		}
 		(*idx)++
 		if i%2 == 1 {
